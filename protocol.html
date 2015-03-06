@@ -28,7 +28,7 @@
         }
       );
       $("#expand-button").click(function( event ) {
-        $("#accordion > div").not(":empty").show().prev().removeClass("ui-corner-all").addClass("ui-corner-top ui-state-active ui-accordion-header-active").children("span:first").removeClass("ui-icon-triangle-1-e").addClass("ui-icon-triangle-1-s");
+        $("#accordion > div").not(":empty").show().prev().removeClass("ui-corner-all").addClass("ui-corner-top ui-state-active ui-accordion-header-active").children("span:first-child").removeClass("ui-icon-triangle-1-e").addClass("ui-icon-triangle-1-s");
       }).hover(
         function() {
           $(this).addClass("ui-state-hover");
@@ -37,7 +37,7 @@
         }
       );
       $("#collapse-button").click(function( event ) {
-        $("#accordion > div").not(":empty").hide().prev().removeClass("ui-corner-top ui-state-active ui-accordion-header-active").addClass("ui-corner-all").children("span:first").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-e");
+        $("#accordion > div").not(":empty").hide().prev().removeClass("ui-corner-top ui-state-active ui-accordion-header-active").addClass("ui-corner-all").children("span:first-child").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-e");
       }).hover(
         function() {
           $(this).addClass("ui-state-hover");
