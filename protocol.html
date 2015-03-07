@@ -14,19 +14,34 @@
   </style>
   <script src="./js/jquery-1.9.1.js"></script>
   <script>
-    $(function() {
-      $("#accordion").addClass("ui-accordion ui-widget");
-      $("#accordion > h4").addClass("ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all").prepend("<span class=\"ui-accordion-header-icon ui-icon ui-icon-triangle-1-e\"></span>");
-      $("#accordion > div").addClass("ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom").hide().filter(":empty").prev().children("span:first-child").hide();
-      $("#accordion > h4").next().not(":empty").prev().click(function( event ) {
-        ($(this).next().css("display") === "none") ? ($(this).removeClass("ui-corner-all").addClass("ui-corner-top ui-state-active ui-accordion-header-active").next().slideDown(), $(this).children("span:first").removeClass("ui-icon-triangle-1-e").addClass("ui-icon-triangle-1-s")) : ($(this).removeClass("ui-corner-top ui-state-active ui-accordion-header-active").addClass("ui-corner-all").next().slideUp(), $(this).children("span:first").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-e"));
-      }).hover(
+    $(function() { 
+      var compose_log = function() {
+        $("#accordion").addClass("ui-accordion ui-widget");
+        $("#accordion > h4").addClass("ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all").prepend("<span class=\"ui-accordion-header-icon ui-icon ui-icon-triangle-1-e\"></span>");
+        $("#accordion > div").addClass("ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom").hide().filter(":empty").prev().children("span:first-child").hide();
+        $("#accordion > h4").next().not(":empty").prev().click(function( event ) {
+          ($(this).next().css("display") === "none") ? ($(this).removeClass("ui-corner-all").addClass("ui-corner-top ui-state-active ui-accordion-header-active").next().slideDown(), $(this).children("span:first").removeClass("ui-icon-triangle-1-e").addClass("ui-icon-triangle-1-s")) : ($(this).removeClass("ui-corner-top ui-state-active ui-accordion-header-active").addClass("ui-corner-all").next().slideUp(), $(this).children("span:first").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-e"));
+        }).hover(
+          function() {
+            $(this).addClass("ui-state-hover");
+          }, function() {
+            $(this).removeClass("ui-state-hover");
+          }
+        );
+
+        $("#compose-button").hide();
+        $("#expand-button").show();
+        $("#collapse-button").show();
+      };
+
+      $("#compose-button").click(compose_log).hover(
         function() {
           $(this).addClass("ui-state-hover");
         }, function() {
           $(this).removeClass("ui-state-hover");
         }
       );
+
       $("#expand-button").click(function( event ) {
         $("#accordion > div").not(":empty").show().prev().removeClass("ui-corner-all").addClass("ui-corner-top ui-state-active ui-accordion-header-active").children("span:first-child").removeClass("ui-icon-triangle-1-e").addClass("ui-icon-triangle-1-s");
       }).hover(
@@ -35,7 +50,8 @@
         }, function() {
           $(this).removeClass("ui-state-hover");
         }
-      );
+      ).hide();
+
       $("#collapse-button").click(function( event ) {
         $("#accordion > div").not(":empty").hide().prev().removeClass("ui-corner-top ui-state-active ui-accordion-header-active").addClass("ui-corner-all").children("span:first-child").removeClass("ui-icon-triangle-1-s").addClass("ui-icon-triangle-1-e");
       }).hover(
@@ -44,12 +60,20 @@
         }, function() {
           $(this).removeClass("ui-state-hover");
         }
-      );
+      ).hide();
+
+      var elementcount = $("#accordion > h4").length
+      if (elementcount < 2000) {
+        compose_log();
+      } else {
+        $("#compose-button > .ui-button-text").append(" " + elementcount + " Events")
+      };
     });
   </script>
 </head>
 <body>
 
+<button id="compose-button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"><span class="ui-button-icon-primary ui-icon ui-icon-wrench"></span><span class="ui-button-text">Compose</span></button>
 <button id="expand-button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"><span class="ui-button-icon-primary ui-icon ui-icon-squaresmall-plus"></span><span class="ui-button-text">Expand All</span></button>
 <button id="collapse-button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"><span class="ui-button-icon-primary ui-icon ui-icon-squaresmall-minus"></span><span class="ui-button-text">Collapse All</span></button>
 
