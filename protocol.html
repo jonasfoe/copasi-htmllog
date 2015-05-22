@@ -13,6 +13,7 @@
     }
   </style>
   <script src="./js/jquery-1.9.1.js"></script>
+  <script>var elementcount</script>
   <script>
     $(function() { 
       var compose_log = function() {
@@ -62,7 +63,6 @@
         }
       ).hide();
 
-      var elementcount = $("#accordion > h4").length
       if (elementcount < 2000) {
         compose_log();
       } else {
